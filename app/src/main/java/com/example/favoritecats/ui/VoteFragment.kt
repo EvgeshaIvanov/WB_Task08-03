@@ -20,6 +20,7 @@ class VoteFragment : Fragment() {
 
     private lateinit var viewModel: MainViewModel
     private var imageId = ""
+    private var value = 0
     private lateinit var binding: FragmentVoteBinding
 
     override fun onCreateView(
@@ -52,11 +53,15 @@ class VoteFragment : Fragment() {
 
         binding.likeButton.setOnClickListener {
             viewModel.getCat()
-            viewModel.like(imageId)
+            viewModel.like(imageId, value = 0, subId = "levi-2708")
             Log.i("IMAGEID", imageId)
         }
 
-        binding.dislikeButton.setOnClickListener { viewModel.getCat()}
+        binding.dislikeButton.setOnClickListener {
+            viewModel.getCat()
+            viewModel.like(imageId, value = 1, subId = "levi-2708")
+            //value = 0
+        }
     }
 
 }

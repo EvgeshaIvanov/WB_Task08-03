@@ -1,17 +1,14 @@
 package com.example.favoritecats.network
 
+import android.util.Log
 import com.example.favoritecats.model.CatData
 import com.example.favoritecats.model.FavouriteCatData
+import com.example.favoritecats.model.ImageCat
 import com.example.favoritecats.network.KtorInstance.Companion.BASE_URL
 import io.ktor.client.call.*
 import io.ktor.client.request.*
-import io.ktor.client.request.forms.*
-import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.ktor.util.*
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.encodeToJsonElement
 
 object RepositoryImpl {
 
@@ -22,15 +19,27 @@ object RepositoryImpl {
     }
 
     @OptIn(InternalAPI::class)
-    suspend fun likeCat(imageId: String): FavouriteCatData {
+    suspend fun likeCat(imageId: String, value: Int, subId: String): FavouriteCatData {
         return apiRequest.getClient().post("$BASE_URL/votes") {
             contentType(ContentType.Application.Json)
-            setBody(FavouriteCatData(image_id = imageId, value = 1))
+            setBody(FavouriteCatData(image_id = imageId, sub_id = subId, value = value))
         }.body<FavouriteCatData>()
     }
 
     suspend fun getFavouriteCats(): List<FavouriteCatData> {
-        return apiRequest.getClient().get("$BASE_URL/votes").body()
+        return apiRequest.getClient().get("$BASE_URL/votes"){
+            parameter("sub_id", "levi-2708")
+            parameter("value", 0)
+        }.body()
+    }
+
+    suspend fun getImageFromId(imageId: String) : ImageCat {
+        Log.i("REQS", imageId)
+            return apiRequest.getClient().get("$BASE_URL/images/$imageId").body()
+    }
+
+    suspend fun deleteFromFavouriteList(id: Int) {
+        return apiRequest.getClient().delete("$BASE_URL/votes/$id").body()
     }
 
     /*

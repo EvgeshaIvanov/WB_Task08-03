@@ -1,11 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-<TextView
-    android:textSize="32sp"
-    android:id="@+id/image_id"
-    android:text="image id"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/image_cat"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:placeholderImage="@drawable/ic_launcher_foreground" />
+
+    <TextView
+        android:id="@+id/image_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="image id"
+        android:textSize="32sp" />
+
+    <Button
+        android:id="@+id/delete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="delete" />
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -2,17 +2,56 @@ package com.example.favoritecats
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentTransaction
+import com.example.favoritecats.ui.FavouritesCatsFragment
 import com.example.favoritecats.ui.VoteFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarMenu
 
 class MainActivity : AppCompatActivity() {
+
+    private lateinit var voteFragment: VoteFragment
+
+    private lateinit var favouritesCatsFragment: FavouritesCatsFragment
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        supportFragmentManager.beginTransaction().add(R.id.container_view, VoteFragment()).commit()
+        voteFragment = VoteFragment()
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container_view, voteFragment)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .commit()
+
+        val bottomNavigation: BottomNavigationView = findViewById(R.id.bottom_nav)
+        bottomNavigation.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+
+                R.id.voteFragment -> {
+                    voteFragment = VoteFragment()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.container_view, voteFragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit()
+                }
+
+                R.id.favouritesCatsFragment -> {
+                    favouritesCatsFragment = FavouritesCatsFragment()
+                    supportFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.container_view, favouritesCatsFragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit()
+                }
+            }
+            true
+        }
+
 
     }
-
 
 /*
   @OptIn(DelicateCoroutinesApi::class)

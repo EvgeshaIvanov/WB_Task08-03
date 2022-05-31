@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:icon="@drawable/voting"
         android:id="@+id/voteFragment"
-        android:title="vote" />
+        android:title="@string/voting_text_nav" />
     <item
         android:id="@+id/favouritesCatsFragment"
-        android:title="favourite" />
+        android:icon="@drawable/favorite"
+        android:title="@string/favourite_text_nav" />
 </menu>

@@ -50,7 +50,7 @@ class KtorInstance {
     companion object {
         const val BASE_URL = "https://api.thecatapi.com/v1"
         const val API_KEY = "x-api-key"
-        const val TOKEN = "b8ba2d27-bdee-4f70-bcf5-339a73a5e1fd"
+        const val TOKEN = "834fffcf-e5fc-46fb-af03-6ebd407683b1"
     }
 
 }
