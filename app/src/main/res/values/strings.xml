@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">FavoriteCats</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="voting_text_nav">Voting</string>
     <string name="favourite_text_nav">Favourite</string>
+    <string name="like_text">LIKE</string>
+    <string name="dislike_text">DISLIKE</string>
+    <string name="delete_text">delete</string>
 </resources>

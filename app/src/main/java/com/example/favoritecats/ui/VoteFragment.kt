@@ -12,16 +12,20 @@ import com.example.favoritecats.MainViewModel
 import com.example.favoritecats.MainViewModelFactory
 import com.example.favoritecats.databinding.FragmentVoteBinding
 import com.example.favoritecats.model.FavouriteCatData
+import com.example.favoritecats.network.KtorInstance.Companion.DISLIKE
+import com.example.favoritecats.network.KtorInstance.Companion.LIKE
+import com.example.favoritecats.network.KtorInstance.Companion.SUB_ID
 import com.example.favoritecats.network.RepositoryImpl
 import com.facebook.drawee.backends.pipeline.Fresco
 
 
 class VoteFragment : Fragment() {
 
-    private lateinit var viewModel: MainViewModel
-    private var imageId = ""
-    private var value = 0
     private lateinit var binding: FragmentVoteBinding
+
+    private lateinit var viewModel: MainViewModel
+
+    private var imageId = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,29 +42,24 @@ class VoteFragment : Fragment() {
         val viewModelFactory = MainViewModelFactory(repository)
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         viewModel.getCat()
-
         viewModel.list.observe(viewLifecycleOwner) { response ->
-          response.forEach {
-              imageId = it.id
-              binding.catText.text = it.id
-              Log.i("URIBLY", it.url)
+            response.forEach { cat ->
+                imageId = cat.id
                 val controller = Fresco.newDraweeControllerBuilder()
-                    .setUri(it.url)
+                    .setUri(cat.url)
                     .build()
-              binding.imageCat.controller = controller
-          }
+                binding.imageCat.controller = controller
+            }
         }
 
         binding.likeButton.setOnClickListener {
             viewModel.getCat()
-            viewModel.like(imageId, value = 0, subId = "levi-2708")
-            Log.i("IMAGEID", imageId)
+            viewModel.like(imageId, value = LIKE, subId = SUB_ID)
         }
 
         binding.dislikeButton.setOnClickListener {
             viewModel.getCat()
-            viewModel.like(imageId, value = 1, subId = "levi-2708")
-            //value = 0
+            viewModel.like(imageId, value = DISLIKE, subId = SUB_ID)
         }
     }
 

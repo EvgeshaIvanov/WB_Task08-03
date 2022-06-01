@@ -8,7 +8,6 @@ import kotlinx.serialization.Transient
 data class CatData(
     val id: String,
     val url: String,
-
 )
 
 

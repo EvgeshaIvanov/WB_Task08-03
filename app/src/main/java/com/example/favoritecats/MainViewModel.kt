@@ -11,73 +11,36 @@ import com.example.favoritecats.network.RepositoryImpl
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel(private val repository: RepositoryImpl): ViewModel() {
-
-
-    private var result = mutableListOf<CatData>()
+class MainViewModel(private val repository: RepositoryImpl) : ViewModel() {
 
     val list = MutableLiveData<List<CatData>>()
 
     val favouriteCatsList = MutableLiveData<List<FavouriteCatData>>()
 
-    val imagesCats = MutableLiveData<ImageCat>()
-
-    fun getCat(){
+    fun getCat() {
         viewModelScope.launch(Dispatchers.IO) {
             val response = repository.getRandomCat()
             list.postValue(response)
-            Log.i("Response_ViewModel", list.toString())
         }
     }
 
-    fun like(imageId: String, value: Int, subId: String){
+    fun like(imageId: String, value: Int, subId: String) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.likeCat(imageId, value, subId)
         }
     }
 
-    fun favouriteCats(){
+    fun favouriteCats() {
         viewModelScope.launch(Dispatchers.IO) {
             val response = repository.getFavouriteCats()
             favouriteCatsList.postValue(response)
-            Log.i("Response_ViewModel", favouriteCatsList.toString())
         }
     }
 
-    fun setImageFromId(imageId: String){
-        viewModelScope.launch(Dispatchers.IO) {
-            val response = repository.getImageFromId(imageId)
-            imagesCats.postValue(response)
-            Log.i("Response_Cats", imagesCats.toString())
-        }
-    }
-    fun deleteFromFavouriteList(id: Int){
+    fun deleteFromFavouriteList(id: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteFromFavouriteList(id)
         }
     }
-
-    /*
-    suspend fun getRandomCat(): List<CatData>{
-        viewModelScope.launch(Dispatchers.IO) {
-            result = repository.getRandomCat() as MutableList<CatData>
-        withContext(Dispatchers.Main){
-            list.postValue(result)
-            Log.i("TEXT_TEST", result.toString())
-        }
-
-        }
-        return result.toList()
-    }
-
-    fun getCat(){
-        viewModelScope.launch {
-        val cat = getRandomCat()
-            list.postValue(cat)
-        }
-    }
-
-     */
-
 
 }
