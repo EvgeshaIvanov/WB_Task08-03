@@ -23,7 +23,7 @@ class KtorInstance {
         }
     }
 
-    fun getClient(): HttpClient{
+    fun getClient(): HttpClient {
         return client
     }
 

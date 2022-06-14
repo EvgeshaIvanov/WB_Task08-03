@@ -12,7 +12,7 @@ data class FavouriteCatData(
     val sub_id: String? = "",
     var value: Int = 2
 ) {
-    fun toCatDb() : FavouriteCatDataDb = FavouriteCatDataDb(
+    fun toCatDb(): FavouriteCatDataDb = FavouriteCatDataDb(
         id = id,
         imageId = image_id
     )

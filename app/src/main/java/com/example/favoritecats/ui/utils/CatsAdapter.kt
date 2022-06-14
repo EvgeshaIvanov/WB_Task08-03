@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.favoritecats.databinding.ItemListBinding
 import com.example.favoritecats.data.network.FavouriteCatData
+import com.example.favoritecats.databinding.ItemListBinding
 import com.facebook.drawee.backends.pipeline.Fresco
 
 class CatsAdapter : RecyclerView.Adapter<CatsViewHolder>() {

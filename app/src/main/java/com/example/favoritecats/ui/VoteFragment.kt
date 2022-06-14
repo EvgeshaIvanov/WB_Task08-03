@@ -1,20 +1,19 @@
 package com.example.favoritecats.ui
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.favoritecats.data.network.KtorInstance.Companion.LIKE
 import com.example.favoritecats.data.network.KtorInstance.Companion.SUB_ID
-import com.example.favoritecats.ui.viewmodel.MainViewModel
-import com.example.favoritecats.ui.viewmodel.MainViewModelFactory
-import com.example.favoritecats.databinding.FragmentVoteBinding
 import com.example.favoritecats.data.network.NetworkRepository
 import com.example.favoritecats.data.room.AppDatabase
 import com.example.favoritecats.data.room.RoomCatsRepository
+import com.example.favoritecats.databinding.FragmentVoteBinding
+import com.example.favoritecats.ui.viewmodel.MainViewModel
+import com.example.favoritecats.ui.viewmodel.MainViewModelFactory
 import com.facebook.drawee.backends.pipeline.Fresco
 
 

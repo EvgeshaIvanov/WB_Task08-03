@@ -2,7 +2,6 @@ package com.example.favoritecats.data.network
 
 import com.example.favoritecats.data.network.KtorInstance.Companion.BASE_URL
 import com.example.favoritecats.data.network.KtorInstance.Companion.SUB_ID
-import com.example.favoritecats.data.room.CatsDao
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*

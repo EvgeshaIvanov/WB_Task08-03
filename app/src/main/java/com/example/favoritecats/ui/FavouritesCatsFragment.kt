@@ -1,20 +1,19 @@
 package com.example.favoritecats.ui
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.favoritecats.ui.viewmodel.MainViewModel
-import com.example.favoritecats.ui.viewmodel.MainViewModelFactory
-import com.example.favoritecats.databinding.FragmentFavouritesCatsBinding
-import com.example.favoritecats.data.room.RoomCatsRepository
 import com.example.favoritecats.data.network.NetworkRepository
 import com.example.favoritecats.data.room.AppDatabase
+import com.example.favoritecats.data.room.RoomCatsRepository
+import com.example.favoritecats.databinding.FragmentFavouritesCatsBinding
 import com.example.favoritecats.ui.utils.CatsAdapter
+import com.example.favoritecats.ui.viewmodel.MainViewModel
+import com.example.favoritecats.ui.viewmodel.MainViewModelFactory
 
 
 class FavouritesCatsFragment : Fragment() {
@@ -47,10 +46,10 @@ class FavouritesCatsFragment : Fragment() {
         val viewModelFactory = MainViewModelFactory(networkRepository, roomRepository)
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         viewModel.favouriteCatsList.observe(viewLifecycleOwner) { listOfCats ->
-                catsAdapter.cats = listOfCats
-                catsAdapter.clickOnCatListener = { cat ->
-                    viewModel.deleteFromFavouriteList(cat.id, cat.uid)
-                }
+            catsAdapter.cats = listOfCats
+            catsAdapter.clickOnCatListener = { cat ->
+                viewModel.deleteFromFavouriteList(cat.id, cat.uid)
+            }
         }
     }
 
