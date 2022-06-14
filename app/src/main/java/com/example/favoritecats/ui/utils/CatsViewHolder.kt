@@ -1,4 +1,4 @@
-package com.example.favoritecats.ui
+package com.example.favoritecats.ui.utils
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.favoritecats.databinding.ItemListBinding

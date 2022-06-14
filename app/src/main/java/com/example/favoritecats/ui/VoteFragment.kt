@@ -1,6 +1,5 @@
 package com.example.favoritecats.ui
 
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,14 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.favoritecats.MainViewModel
-import com.example.favoritecats.MainViewModelFactory
+import com.example.favoritecats.data.network.KtorInstance.Companion.LIKE
+import com.example.favoritecats.data.network.KtorInstance.Companion.SUB_ID
+import com.example.favoritecats.ui.viewmodel.MainViewModel
+import com.example.favoritecats.ui.viewmodel.MainViewModelFactory
 import com.example.favoritecats.databinding.FragmentVoteBinding
-import com.example.favoritecats.model.FavouriteCatData
-import com.example.favoritecats.network.KtorInstance.Companion.DISLIKE
-import com.example.favoritecats.network.KtorInstance.Companion.LIKE
-import com.example.favoritecats.network.KtorInstance.Companion.SUB_ID
-import com.example.favoritecats.network.RepositoryImpl
+import com.example.favoritecats.data.network.NetworkRepository
+import com.example.favoritecats.data.room.AppDatabase
+import com.example.favoritecats.data.room.RoomCatsRepository
 import com.facebook.drawee.backends.pipeline.Fresco
 
 
@@ -38,11 +37,14 @@ class VoteFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val repository = RepositoryImpl
-        val viewModelFactory = MainViewModelFactory(repository)
+        val networkRepository = NetworkRepository
+        val dao = AppDatabase.getDatabase(requireActivity().applicationContext).catsDao()
+        val roomRepository = RoomCatsRepository(dao)
+        val viewModelFactory = MainViewModelFactory(networkRepository, roomRepository)
+
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-        viewModel.getCat()
-        viewModel.list.observe(viewLifecycleOwner) { response ->
+        viewModel.randomCat()
+        viewModel.randomCats.observe(viewLifecycleOwner) { response ->
             response.forEach { cat ->
                 imageId = cat.id
                 val controller = Fresco.newDraweeControllerBuilder()
@@ -53,13 +55,13 @@ class VoteFragment : Fragment() {
         }
 
         binding.likeButton.setOnClickListener {
-            viewModel.getCat()
-            viewModel.like(imageId, value = LIKE, subId = SUB_ID)
+            viewModel.randomCat()
+            viewModel.likeCat(imageId, value = LIKE, subId = SUB_ID)
+
         }
 
         binding.dislikeButton.setOnClickListener {
-            viewModel.getCat()
-            viewModel.like(imageId, value = DISLIKE, subId = SUB_ID)
+            viewModel.randomCat()
         }
     }
 

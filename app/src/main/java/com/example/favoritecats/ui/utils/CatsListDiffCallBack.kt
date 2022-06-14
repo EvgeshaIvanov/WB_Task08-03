@@ -1,7 +1,7 @@
-package com.example.favoritecats.ui
+package com.example.favoritecats.ui.utils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.favoritecats.model.FavouriteCatData
+import com.example.favoritecats.data.network.FavouriteCatData
 
 class CatsListDiffCallBack(
     private val oldList: List<FavouriteCatData>,

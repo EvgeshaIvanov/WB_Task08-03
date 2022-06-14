@@ -1,13 +1,11 @@
-package com.example.favoritecats
+package com.example.favoritecats.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.example.favoritecats.ui.FavouritesCatsFragment
-import com.example.favoritecats.ui.VoteFragment
+import com.example.favoritecats.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarMenu
 
 class MainActivity : AppCompatActivity() {
 

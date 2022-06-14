@@ -1,14 +1,12 @@
-package com.example.favoritecats.ui
+package com.example.favoritecats.ui.utils
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.favoritecats.databinding.FragmentFavouritesCatsBinding
 import com.example.favoritecats.databinding.ItemListBinding
-import com.example.favoritecats.model.FavouriteCatData
-import com.example.favoritecats.model.ImageCat
+import com.example.favoritecats.data.network.FavouriteCatData
 import com.facebook.drawee.backends.pipeline.Fresco
 
 class CatsAdapter : RecyclerView.Adapter<CatsViewHolder>() {
@@ -24,7 +22,6 @@ class CatsAdapter : RecyclerView.Adapter<CatsViewHolder>() {
             field = value
 
         }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

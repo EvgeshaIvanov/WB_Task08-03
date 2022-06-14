@@ -1,17 +1,20 @@
 package com.example.favoritecats.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.favoritecats.MainViewModel
-import com.example.favoritecats.MainViewModelFactory
+import com.example.favoritecats.ui.viewmodel.MainViewModel
+import com.example.favoritecats.ui.viewmodel.MainViewModelFactory
 import com.example.favoritecats.databinding.FragmentFavouritesCatsBinding
-import com.example.favoritecats.network.RepositoryImpl
+import com.example.favoritecats.data.room.RoomCatsRepository
+import com.example.favoritecats.data.network.NetworkRepository
+import com.example.favoritecats.data.room.AppDatabase
+import com.example.favoritecats.ui.utils.CatsAdapter
 
 
 class FavouritesCatsFragment : Fragment() {
@@ -38,19 +41,18 @@ class FavouritesCatsFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        val repository = RepositoryImpl
-        val viewModelFactory = MainViewModelFactory(repository)
+        val networkRepository = NetworkRepository
+        val dao = AppDatabase.getDatabase(requireActivity().applicationContext).catsDao()
+        val roomRepository = RoomCatsRepository(dao)
+        val viewModelFactory = MainViewModelFactory(networkRepository, roomRepository)
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-        viewModel.favouriteCats()
-        viewModel.favouriteCatsList.observe(viewLifecycleOwner) { cats ->
-            catsAdapter.cats = cats.filter { it.value == 0 }
-            catsAdapter.clickOnCatListener = { cat ->
-                viewModel.deleteFromFavouriteList(cat.id)
-            }
-            viewModel.favouriteCats()
+        viewModel.favouriteCatsList.observe(viewLifecycleOwner) { listOfCats ->
+                catsAdapter.cats = listOfCats
+                catsAdapter.clickOnCatListener = { cat ->
+                    viewModel.deleteFromFavouriteList(cat.id, cat.uid)
+                }
         }
     }
-
 
     private fun initRecyclerView() {
         catsAdapter = CatsAdapter()

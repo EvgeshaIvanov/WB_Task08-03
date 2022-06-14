@@ -1,17 +1,13 @@
-package com.example.favoritecats.network
+package com.example.favoritecats.data.network
 
-import android.util.Log
-import com.example.favoritecats.model.CatData
-import com.example.favoritecats.model.FavouriteCatData
-import com.example.favoritecats.model.ImageCat
-import com.example.favoritecats.network.KtorInstance.Companion.BASE_URL
-import com.example.favoritecats.network.KtorInstance.Companion.SUB_ID
+import com.example.favoritecats.data.network.KtorInstance.Companion.BASE_URL
+import com.example.favoritecats.data.network.KtorInstance.Companion.SUB_ID
+import com.example.favoritecats.data.room.CatsDao
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import io.ktor.util.*
 
-object RepositoryImpl {
+object NetworkRepository {
 
     private val apiRequest = KtorInstance()
 
