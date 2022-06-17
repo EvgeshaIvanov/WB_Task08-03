@@ -6,4 +6,7 @@
     <string name="like_text">LIKE</string>
     <string name="dislike_text">DISLIKE</string>
     <string name="delete_text">delete</string>
+    <string name="name_dev">Eugene</string>
+    <string name="tg_link">https://t.me/EvgeshaOG</string>
+    <string name="data_of_create">16.06.2022</string>
 </resources>

@@ -29,7 +29,6 @@ class KtorInstance {
 
     companion object {
         const val LIKE = 0
-        const val DISLIKE = 1
         const val SUB_ID = "levi-2708"
         const val BASE_URL = "https://api.thecatapi.com/v1"
         const val API_KEY = "x-api-key"

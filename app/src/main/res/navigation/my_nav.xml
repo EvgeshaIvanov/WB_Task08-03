@@ -15,4 +15,8 @@
         android:name="com.example.favoritecats.ui.FavouritesCatsFragment"
         android:label="fragment_favourites_cats"
         tools:layout="@layout/fragment_favourites_cats" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.example.favoritecats.ui.AboutFragment"
+        android:label="AboutFragment" />
 </navigation>
