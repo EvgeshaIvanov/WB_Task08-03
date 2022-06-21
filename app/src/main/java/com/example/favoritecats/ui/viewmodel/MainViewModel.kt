@@ -1,16 +1,14 @@
 package com.example.favoritecats.ui.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.favoritecats.data.network.CatData
 import com.example.favoritecats.data.network.FavouriteCatData
-import com.example.favoritecats.data.room.RoomCatsRepository
 import com.example.favoritecats.data.network.NetworkRepository
+import com.example.favoritecats.data.room.RoomCatsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlin.math.log
 
 class MainViewModel(
     private val networkRepository: NetworkRepository,

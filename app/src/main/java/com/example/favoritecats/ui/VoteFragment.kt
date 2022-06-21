@@ -40,7 +40,6 @@ class VoteFragment : Fragment() {
         val dao = AppDatabase.getDatabase(requireActivity().applicationContext).catsDao()
         val roomRepository = RoomCatsRepository(dao)
         val viewModelFactory = MainViewModelFactory(networkRepository, roomRepository)
-
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
         viewModel.randomCat()
         viewModel.randomCats.observe(viewLifecycleOwner) { response ->
