@@ -41,7 +41,7 @@ class VoteFragment : Fragment() {
         val roomRepository = RoomCatsRepository(dao)
         val viewModelFactory = MainViewModelFactory(networkRepository, roomRepository)
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-        viewModel.randomCat()
+
         viewModel.randomCats.observe(viewLifecycleOwner) { response ->
             response.forEach { cat ->
                 imageId = cat.id
@@ -51,16 +51,16 @@ class VoteFragment : Fragment() {
                 binding.imageCat.controller = controller
             }
         }
-
-        binding.likeButton.setOnClickListener {
-            viewModel.randomCat()
-            viewModel.likeCat(imageId, value = LIKE, subId = SUB_ID)
-
+        with(binding) {
+            likeButton.setOnClickListener {
+                viewModel.randomCat()
+                viewModel.likeCat(imageId, value = LIKE, subId = SUB_ID)
+            }
+            dislikeButton.setOnClickListener {
+                viewModel.randomCat()
+            }
         }
 
-        binding.dislikeButton.setOnClickListener {
-            viewModel.randomCat()
-        }
     }
 
 }

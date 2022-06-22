@@ -32,7 +32,6 @@ class FavouritesCatsFragment : Fragment() {
         return binding.root
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initRecyclerView()
@@ -45,6 +44,7 @@ class FavouritesCatsFragment : Fragment() {
         val roomRepository = RoomCatsRepository(dao)
         val viewModelFactory = MainViewModelFactory(networkRepository, roomRepository)
         viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
+        viewModel.refreshListOfFavoriteCats()
         viewModel.favouriteCatsList.observe(viewLifecycleOwner) { listOfCats ->
             catsAdapter.cats = listOfCats
             catsAdapter.clickOnCatListener = { cat ->

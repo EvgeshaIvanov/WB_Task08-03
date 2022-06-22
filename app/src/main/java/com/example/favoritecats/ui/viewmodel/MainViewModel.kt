@@ -15,7 +15,11 @@ class MainViewModel(
     private val roomRepository: RoomCatsRepository
 ) : ViewModel() {
 
-    val randomCats = MutableLiveData<List<CatData>>()
+    val randomCats: MutableLiveData<List<CatData>> by lazy {
+        MutableLiveData<List<CatData>>().also {
+            randomCat()
+        }
+    }
 
     val favouriteCatsList = MutableLiveData<List<FavouriteCatData>>()
 
@@ -57,7 +61,7 @@ class MainViewModel(
         }
     }
 
-    private fun refreshListOfFavoriteCats() {
+    fun refreshListOfFavoriteCats() {
         viewModelScope.launch(Dispatchers.IO) {
             roomRepository.insertAll(networkRepository.getFavouriteCats())
             val response = roomRepository.getAllCats()
